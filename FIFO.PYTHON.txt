@@ -1,0 +1,65 @@
+from tkinter import Tk, Label, SOLID
+
+# Global variables
+row = 1
+col = 1
+
+def new_window(txt, capacity):
+    global root
+    root = Tk()
+    Basic_design(capacity)
+    root.title("Visualisation Of Algorithm: " + txt)
+    root.geometry("1600x660")
+
+# For spaces in between Frames and for better clarity and visibility
+def empty_space():
+    global root
+    global row
+    global col
+    L = Label(root, text=" ", height="1", width="1")
+    L.grid(row=row, column=col)
+    row += 1
+
+# If the reference string is too large then remove this function for better visibility
+def build_EmptyLabel():
+    global col
+    global row
+    MyLabel1= Label(root,text=" ",padx=15,pady=10)
+    MyLabel1.grid(row=1,column=col+1)
+    col += 1
+
+# Basic layout design
+def Basic_design(N):
+    k = N
+
+    RefStringLabel = Label(root, text="Reference String")
+    RefStringLabel.configure(font=("Century Gothic", 15))
+    RefStringLabel.grid(row=0, column=0, padx=20, pady=10)
+    
+    for i in range(N):
+        mylabel = Label(root, text="Frame " + str(k), pady=10, padx=20, fg="black")
+        mylabel.configure(font=("Century Gothic", 15))
+        mylabel.grid(row=i+1, column=0)
+        k -= 1
+    
+    FaultStringLabel = Label(root, text="Page Faults")
+    FaultStringLabel.configure(font=("Century Gothic", 15))
+    FaultStringLabel.grid(row=N+1, column=0, padx=20, pady=10)
+
+# Function to build the labels containing reference string
+def cell(element):
+    global root
+    global row
+    global col
+    L = Label(root, text=element, padx=20, pady=10, bd=1, fg="green", relief=SOLID, anchor="center")
+    L.configure(font=("Century Gothic", 12))
+    L.grid(row=row, column=col)
+    row += 1
+
+# Example usage:
+if __name__ == "__main__":
+    new_window("Example", 5)  # Example window with capacity of 5 frames
+    cell(1)  # Example cell with element 1
+    empty_space()  # Example empty space
+    build_EmptyLabel()  # Example empty label
+    root.mainloop()
